@@ -15,7 +15,7 @@ const colectionViewTemplate = (data) => html`
         <h3 class="type">${tattoo.type}</h3>
         <span>Uploaded by </span>
         <p class="user-type">${tattoo.userType}</p>
-        <a class="details-btn" href="#">Learn More</a>
+        <a class="details-btn" href="/details/${tattoo._id}">Learn More</a>
       </div>`)}
   </section>
 `;

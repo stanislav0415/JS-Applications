@@ -6,6 +6,9 @@ import { myLoginView } from './view/loginView.js'
 import { myRegisterView } from './view/registerView.js'
 import { myColectionView } from './view/colectionView.js'
 import { mylogoutView } from './view/logoutView.js'
+import { myAddTattooView } from './view/addTattooView.js'
+import { myDetailsViews } from './view/detailsView.js'
+import { myEditView } from './view/editView.js'
 
 
 
@@ -31,6 +34,9 @@ page('/login', myLoginView)
 page('/register', myRegisterView)
 page('/colection', myColectionView)
 page('/logout',mylogoutView)
+page('/add', myAddTattooView)
+page('/details/:id',myDetailsViews)
+page('/edit/:id',myEditView)
 
 
 
