@@ -32,18 +32,19 @@ const editViewTemplate = (data) => html`
         >
 
         <select id="user-type" name="user-type">
-          <option value="">Select your role</option>
-          <option value="Tattoo Artist">Tattoo Artist</option>
-          <option value="Tattoo Enthusiast">Tattoo Enthusiast</option>
-          <option value="First Time in Tattoo">First Time in Tattoo</option>
-          <option value="Tattoo Collector">Tattoo Collector</option>
+          <option value="" ?selected="${data.userType === ''}">Select your role</option>
+          <option value="Tattoo Artist" ?selected="${data.userType === 'Tattoo Artist'}">Tattoo Artist</option>
+          <option value="Tattoo Enthusiast" ?selected="${data.userType === 'Tattoo Enthusiast'}">Tattoo Enthusiast</option>
+          <option value="First Time in Tattoo" ?selected="${data.userType === 'First Time in Tattoo'}">First Time in Tattoo</option>
+          <option value="Tattoo Collector" ?selected="${data.userType === 'Tattoo Collector'}">Tattoo Collector</option>
         </select>
+<script>
+ 
+ 
+  const userTypeSelect = document.getElementById("user-type");
 
-        <script>
-       
-          const userTypeSelect = document.getElementById("user-type");
-          userTypeSelect.value = data.userType; // Set the selected value
-        </script>
+  userTypeSelect.value = data.userType;
+</script>
         <button type="submit">Edit</button>
       </form>
     </div>
@@ -52,13 +53,13 @@ const editViewTemplate = (data) => html`
 async function onSubmit(e) {
   e.preventDefault();
   const formData = new FormData(e.target);
-  const tattooType = formData.get("type");
+  const type = formData.get("type");
   const imageUrl = formData.get("image-url");
   const description = formData.get("description");
   const userType = formData.get("user-type");
 
   if (
-    tattooType == "" ||
+    type == "" ||
     imageUrl == "" ||
     description == "" ||
     userType == ""
@@ -68,7 +69,7 @@ async function onSubmit(e) {
   }
 
   const data = await put(`/data/tattoos/${e.target.id}`, {
-    tattooType,
+    type,
     imageUrl,
     description,
     userType,
@@ -83,6 +84,7 @@ export async function myEditView(ctx) {
   const id = ctx.params.id;
 
   const data = await get(`/data/tattoos/${id}`);
+  document.getElementById("user-type").value = data.userType;
 
   render(editViewTemplate(data), document.getElementById("main"));
 }
